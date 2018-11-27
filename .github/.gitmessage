@@ -1,0 +1,12 @@
+# <type>(<scope>): <subject>
+# Scope: events, kafka, userModel, authorization, authentication, loginPage
+# feat (feature), fix (bug fix), docs (documentation), style (formatting), refactor test (when adding missing tests), chore (maintain)
+
+feat(kafka): implement exactly once delivery
+
+- ensure every event published to kafka is delivered exactly once
+- implement error handling for failed delivery
+
+[Delivers #130635935]
+
+# [(Finishes|Fixes|Delivers) #TRACKER_STORY_ID]

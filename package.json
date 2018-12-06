@@ -12,11 +12,12 @@
     "lint": "eslint ./client",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage --colors"
+    "test:coverage": "jest --coverage --colors && cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "babel-core": "^7.0.0-0",
     "babel-jest": "^23.6.0",
+    "coveralls": "^3.0.2",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "enzyme-to-json": "^3.3.4",

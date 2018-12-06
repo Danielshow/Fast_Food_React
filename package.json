@@ -7,8 +7,8 @@
   "author": "Daniel Shotonwa <danielshotonwa53@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "build": "webpack",
+    "dev": "webpack-dev-server --open",
+    "start": "webpack",
     "lint": "eslint ./client",
     "test": "jest",
     "test:watch": "jest --watch",

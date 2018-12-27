@@ -9,12 +9,13 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
   mode: 'development',
-  entry: path.resolve(__dirname, './src/index.js'),
+  entry: path.resolve(__dirname, './src/index.jsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.min.js',
     publicPath: '/',
   },
+  resolve: { extensions: ['.js','.jsx'] },
   module: {
     rules: [
       {
@@ -32,6 +33,17 @@ module.exports = {
             loader: 'css-loader',
           },
         ],
+      },
+      {
+        test: /\.(jpg|png|gif|svg|pdf|ico)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name]-[hash:8].[ext]'
+            },
+          },
+        ]
       },
     ],
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from '../../App';
-import '../setup/setupEnzyme';
+import App from './App';
+import '../../__test__/setup/setupEnzyme';
 
 describe('App renders successfully', () => {
   it('renders', () => {
@@ -10,7 +10,7 @@ describe('App renders successfully', () => {
 
   it('Renders Landing Page', () => {
     const wrapper = shallow(<App />);
-    const header = wrapper.find('LandingPage');
+    const header = wrapper.find('Header');
     expect(header.length).toBe(1);
   });
 });

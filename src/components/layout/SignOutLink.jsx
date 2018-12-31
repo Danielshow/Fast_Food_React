@@ -1,13 +1,21 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const SignOutLink = () => (
   <div className="signout">
     <div className="signoutlinks">
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/">Profile</a></li>
-        <li><a href="/">Order</a></li>
-        <li><a href="/">Logout</a></li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/">Profile</NavLink></li>
+        <li><NavLink to="/">Order</NavLink></li>
+        <li>
+          <a
+            href="/"
+            onClick={() => localStorage.setItem('token', null)}
+          >
+            Logout
+          </a>
+        </li>
       </ul>
     </div>
   </div>

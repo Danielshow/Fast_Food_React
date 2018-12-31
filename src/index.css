@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Charm|Quicksand|Raleway');
+
 body, ul{
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .container {
@@ -18,7 +20,7 @@ body, ul{
 .navbar {
   position: fixed;
   width: 100%;
-  background-color: rgb(224, 108, 65);
+  background-color: #e06c41;
   transition: 0.7s; 
   z-index: 200;
 }
@@ -32,8 +34,8 @@ body, ul{
     /* signout links */
 .signout {
   position: absolute;
-  z-index: 200;
-  margin-top: 10px;
+  z-index: 300;
+  margin-top: 20px;
   position: fixed;
   width: 100%}
 
@@ -53,12 +55,11 @@ body, ul{
   text-decoration: none;
   color: black;
 }
-
 /* signin links */
 .signin {
   position: absolute;
-  z-index: 100;
-  margin-top: 10px;
+  z-index: 200;
+  margin-top: 20px;
   position: fixed;
   width: 100%}
 
@@ -284,7 +285,7 @@ hr {
 
 /* footer styling */
 .footer {
-  z-index: 2000;
+  z-index: 5000;
   width: 100%;
   min-height: 25vh;
   background: rgb(40, 43, 46);
@@ -380,4 +381,111 @@ hr {
     padding: 5px;
     width: 100%;
   }
+}
+
+/* signin Controller */
+.signinContainer {
+  background-image: url('../images/image/undraw_typewriter_i8xd.svg');
+  width: 100%;
+  height: 100vh;
+  background-size: 500px 400px;
+  background-repeat: no-repeat;
+  background-position: 20%;
+  background-color: #e06c4236;
+}
+
+.signinForm {
+  position: absolute;
+  background-color: #fff;
+  left: 60%;
+  height: 100vh;
+  width: 40%;
+  overflow: hidden;
+  text-align: center;
+}
+
+.content {
+  padding-top: 60px;
+}
+
+.content h1 {
+  font-family: 'Charm', cursive;
+}
+
+.content h3 {
+  margin-top: 60px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.form-container {
+  width: 50%;
+  margin: 0px auto;
+  text-align: left;
+  padding: 15px;
+  margin-top: 10%;
+}
+.input-field input[type="email"] {
+  border: none;
+  border-bottom: 1px solid #e06c41;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 10px;
+  outline: none;
+  font-size: 16px;
+}
+
+.input-field input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #e06c41;
+  width: 100%;
+  margin-bottom: 10px;
+  height: 35px;
+  outline: none;
+  font-size: 16px;
+}
+
+.input-button {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  outline: none;
+  background: rgb(224, 108, 65);
+  border: 2px solid white;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.account {
+  color: #e06c41;
+  
+}
+
+.create-account {
+  margin-top: 30%;
+}
+
+.spinner {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  background-image: url('../images/image/text-animation-1s-280x100px\ \(1\).svg');
+  z-index: 1000;
+  background-size: 50% 50%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-color: #e06c4236;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 16px;
+}
+
+.inValid {
+  background-color: hsla(31, 86%, 52%, 0.599);
+  color: white;
+}
+.valid {
+  color: black;
 }

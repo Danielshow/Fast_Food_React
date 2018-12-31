@@ -15,6 +15,9 @@ module.exports = {
     filename: 'index.min.js',
     publicPath: '/',
   },
+  devServer: {
+    historyApiFallback: true
+  },
   resolve: { extensions: ['.js','.jsx'] },
   module: {
     rules: [
@@ -49,5 +52,5 @@ module.exports = {
   },
   plugins: [
     HtmlWebpackPluginConfig,
-  ],
+  ]
 };

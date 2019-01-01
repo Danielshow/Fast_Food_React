@@ -1,5 +1,5 @@
-import * as actionType from '../../store/actions/actionType';
-import * as signInActions from '../../store/actions/signIn';
+import * as actionType from '../../../store/actions/actionType';
+import * as signInActions from '../../../store/actions/signIn';
 
 describe('SignIn Actions', () => {
   it('should return an action if postignin is called', () => {

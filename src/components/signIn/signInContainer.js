@@ -4,10 +4,10 @@ import { signInUser, clearResponse } from '../../store/actions/signIn';
 
 export const mapStateToProps = state => {
   return {
-    response: state.response,
-    error: state.error,
-    loading: state.loading,
-    token: state.token
+    response: state.in.response,
+    error: state.in.error,
+    loading: state.in.loading,
+    token: state.in.token
   };
 };
 

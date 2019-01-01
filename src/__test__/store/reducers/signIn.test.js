@@ -1,5 +1,5 @@
-import reducers from '../../store/reducers/reducers';
-import * as actionTypes from '../../store/actions/actionType';
+import reducers from '../../../store/reducers/signin';
+import * as actionTypes from '../../../store/actions/actionType';
 
 describe('Reducers test', () => {
   it('return initial state if action is undefined', () => {

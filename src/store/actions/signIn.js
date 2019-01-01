@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as actionType from './actionType';
+import history from '../../helpers/history';
 
 export const postSignIn = (response) => {
   return {
@@ -50,6 +51,7 @@ export const signInUser = (user) => {
     }).then(response => {
       dispatch(postSignIn(response.data));
       dispatch(logoutUser());
+      history.push('/');
     }).catch(err => {
       dispatch(loginFailed(err.response.data.message));
     });

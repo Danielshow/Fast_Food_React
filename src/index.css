@@ -392,6 +392,14 @@ hr {
   background-repeat: no-repeat;
   background-position: 20%;
   background-color: #e06c4236;
+  animation-name: signin;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes signin{
+0%{transform:scaleX(2)}
+100%{transform: unset}
 }
 
 .signinForm {
@@ -424,7 +432,7 @@ hr {
   padding: 15px;
   margin-top: 10%;
 }
-.input-field input[type="email"] {
+.form-container .input-field input[type="email"] {
   border: none;
   border-bottom: 1px solid #e06c41;
   width: 100%;
@@ -434,7 +442,7 @@ hr {
   font-size: 16px;
 }
 
-.input-field input[type="password"] {
+.form-container .input-field input[type="password"] {
   border: none;
   border-bottom: 1px solid #e06c41;
   width: 100%;
@@ -444,8 +452,19 @@ hr {
   font-size: 16px;
 }
 
-.input-button {
-  width: 100px;
+.form-container .input-field input[type="text"] {
+  border: none;
+  border-bottom: 1px solid #e06c41;
+  width: 100%;
+  margin-bottom: 10px;
+  height: 35px;
+  outline: none;
+  font-size: 16px;
+}
+
+.form-container .input-button {
+  width: 30%;
+  margin-left: 35%;
   height: 40px;
   border-radius: 10px;
   outline: none;
@@ -456,13 +475,17 @@ hr {
   font-size: 16px;
 }
 
-.account {
+.form-container .account a{
   color: #e06c41;
   
 }
 
-.create-account {
-  margin-top: 30%;
+.form-container .create-account {
+  margin-top: 20%;
+}
+
+.createSign {
+  margin-top: 0;
 }
 
 .spinner {
@@ -488,4 +511,59 @@ hr {
 }
 .valid {
   color: black;
+}
+
+/* signup css */
+.signUpContainer{
+  background-image: url('../images/image/undraw_chef_lbjx.svg');
+  width: 100%;
+  height: 100vh;
+  background-size: 500px 400px;
+  background-repeat: no-repeat;
+  background-position: 80%;
+  background-color: #e06c4236;
+  animation-name: signup;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes signup {
+  0%{transform:scale(2)}
+  100%{transform: unset}
+}
+
+.signupForm {
+  position: absolute;
+  background-color: #fff;
+  height: 100vh;
+  width: 40%;
+  overflow: hidden;
+  text-align: center;
+}
+
+.signupf {
+  width: 80%;
+  margin: 0px auto;
+  text-align: left;
+  padding: 10px;
+}
+
+/* Toast container */
+.toastContainer {
+  z-index: 200;
+  position: fixed;
+  height: 60px;
+  width: 20%;
+  border: 1px solid #fff;
+  background-color: #e06c4236;
+  left: 80%;
+  top: 10%;
+  animation-name: toast;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes toast{
+  0% {transform:translate(100%)rotateX(180deg)}
+  100% {transform: translate(0%)}
 }

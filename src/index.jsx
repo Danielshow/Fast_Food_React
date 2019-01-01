@@ -1,14 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import App from './components/App/App';
-import rootReducer from './store/reducers/reducers';
+import signUpReducer from './store/reducers/signup';
+import signInReducer from './store/reducers/signin';
 
 // eslint-disable-next-line
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const rootReducer = combineReducers({
+  in: signInReducer,
+  up: signUpReducer
+});
 const store = createStore(
   rootReducer, composeEnhancers(applyMiddleware(thunk)));
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { isEmailValid } from '../../helpers/authHelpers';
 
 /**
@@ -43,13 +44,10 @@ class signInForm extends Component {
    * @param {object} e
    * @returns {object} - object
    */
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const { props: {authSignInUser} } = this;
-    authSignInUser(this.state);
-    this.setState({
-      password: '',
-    });
+    await authSignInUser(this.state);
   }
    /**
    * @returns {HTML}- JSX
@@ -97,7 +95,8 @@ class signInForm extends Component {
         <p className="create-account">
           New Foodie?
           <span className="account">
-            &nbsp; Create Account
+            &nbsp;
+            <Link to='/signup'>Create Account </Link>
           </span>
         </p>
       </div>

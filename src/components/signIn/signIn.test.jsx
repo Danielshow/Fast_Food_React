@@ -72,7 +72,9 @@ describe('Renders Signin Form', () => {
 });
 
 describe('SignIn Container', () => {
-  const state={};
+  const state={
+    in: {}
+  };
 
   it('should return an object', () => {
     expect(typeof mapStateToProps(state)).toEqual('object');

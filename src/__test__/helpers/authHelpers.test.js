@@ -20,7 +20,7 @@ describe('isEmailValid Validation', () => {
   });
 
   it ('should return false when email is invalid', () => {
-    const email = isPasswordValid('danie.com');
+    const email = isEmailValid('danie.com');
     expect(email).toBe(false);
   });
 });

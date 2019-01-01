@@ -1,0 +1,75 @@
+<svg class="ldt-blank" width="280px"  height="100px"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" style="background: none;"><style type="text/css">path,ellipse,circle,rect,polygon,polyline,line { stroke-width: 0; }
+@keyframes ld-spin {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes ld-spin {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.ld.ld-spin {
+  -webkit-animation: ld-spin 1s infinite;
+  animation: ld-spin 1s infinite;
+}
+
+text { font-family: Courier New }</style><g transform="translate(16.412499999999994 66.35)" style="opacity: 1;">
+  <g style="animation-delay: -0.515998s; animation-duration: 1s; font-size: 48px; animation-direction: reverse; transform-origin: 14.3984px 0px 0px;" class="ld ld-spin">
+    <text fill="#ed6511" style="font-family:Courier New">F</text>
+  </g>
+</g><g transform="translate(45.209374999999994 66.35)" style="opacity: 1;">
+  <g style="animation-delay: -0.447827s; animation-duration: 1s; font-size: 48px; animation-direction: reverse; transform-origin: 14.3984px 0px 0px;" class="ld ld-spin">
+    <text fill="#ed6511" style="font-family:Courier New">a</text>
+  </g>
+</g><g transform="translate(74.00625 66.35)" style="opacity: 1;">
+  <g style="animation-delay: -0.190817s; animation-duration: 1s; font-size: 48px; animation-direction: reverse; transform-origin: 14.3984px 0px 0px;" class="ld ld-spin">
+    <text fill="#ed6511" style="font-family:Courier New">s</text>
+  </g>
+</g><g transform="translate(102.803125 66.35)" style="opacity: 1;">
+  <g style="animation-delay: -0.69555s; animation-duration: 1s; font-size: 48px; animation-direction: reverse; transform-origin: 14.3984px 0px 0px;" class="ld ld-spin">
+    <text fill="#ed6511" style="font-family:Courier New">t</text>
+  </g>
+</g><g transform="translate(131.6 66.35)" style="opacity: 1;">
+  <g style="animation-delay: -0.864845s; animation-duration: 1s; font-size: 48px; animation-direction: reverse; transform-origin: 8.4px 0px 0px;" class="ld ld-spin">
+    <text fill="#ed6511" style="font-family:Courier New"> </text>
+  </g>
+</g><g transform="translate(148.4 66.35)" style="opacity: 1;">
+  <g style="animation-delay: -0.114509s; animation-duration: 1s; font-size: 48px; animation-direction: reverse; transform-origin: 14.3984px 0px 0px;" class="ld ld-spin">
+    <text fill="#ed6511" style="font-family:Courier New">F</text>
+  </g>
+</g><g transform="translate(177.196875 66.35)" style="opacity: 1;">
+  <g style="animation-delay: -0.0677336s; animation-duration: 1s; font-size: 48px; animation-direction: reverse; transform-origin: 14.3984px 0px 0px;" class="ld ld-spin">
+    <text fill="#ed6511" style="font-family:Courier New">o</text>
+  </g>
+</g><g transform="translate(205.99375 66.35)" style="opacity: 1;">
+  <g style="animation-delay: -0.912098s; animation-duration: 1s; font-size: 48px; animation-direction: reverse; transform-origin: 14.3984px 0px 0px;" class="ld ld-spin">
+    <text fill="#ed6511" style="font-family:Courier New">o</text>
+  </g>
+</g><g transform="translate(234.790625 66.35)" style="opacity: 1;">
+  <g style="animation-delay: -0.5356s; animation-duration: 1s; font-size: 48px; animation-direction: reverse; transform-origin: 14.3984px 0px 0px;" class="ld ld-spin">
+    <text fill="#ed6511" style="font-family:Courier New">d</text>
+  </g>
+</g></svg>

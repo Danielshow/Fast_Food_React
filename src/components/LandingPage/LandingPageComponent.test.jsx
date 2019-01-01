@@ -1,25 +1,25 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import LandingPage from '../../components/LandingPage';
-import SignInLink from '../../components/layout/SignInLink';
-import SignOutLink from '../../components/layout/SignOutLink';
-import AboutUs from '../../components/layout/AboutUs';
-import RecentFood from '../../components/layout/RecentFood';
-import SucessStories from '../../components/layout/SuccessStories';
-import Footer from '../../components/layout/Footer';
-import Navbar from '../../components/layout/Navbar';
+import LandingPage from './LandingPage';
+import SignInLink from '../layout/SignInLink';
+import SignOutLink from '../layout/SignOutLink';
+import AboutUs from './AboutUs';
+import RecentFood from './RecentFood';
+import SucessStories from './SuccessStories';
+import Footer from '../layout/Footer';
+import Navbar from '../layout/Navbar';
 
-import '../setup/setupEnzyme';
+import '../../__test__/setup/setupEnzyme';
 
 describe('LandingPage renders successfully', () => {
   it('renders', () => {
     shallow(<LandingPage />);
   });
 
-  it('Renders Navbar component', () => {
+  it('Renders AboutUs component', () => {
     const wrapper = shallow(<LandingPage />);
-    const navbar = wrapper.find('Navbar');
-    expect(navbar.length).toBe(1);
+    const aboutUs = wrapper.find('AboutUs');
+    expect(aboutUs.length).toBe(1);
   });
 
   it('Renders SignInLink component', () => {

@@ -1,12 +1,8 @@
 import React from 'react';
-import Navbar from './layout/Navbar';
-import Footer from './layout/Footer';
-import SignInLink from './layout/SignOutLink';
-import SignOutLink from './layout/SignInLink';
-import '../App.css';
-import AboutUs from './layout/AboutUs';
-import RecentFood from './layout/RecentFood';
-import SucessStories from './layout/SuccessStories';
+import AboutUs from './AboutUs';
+import RecentFood from './RecentFood';
+import SucessStories from './SuccessStories';
+import Footer from '../layout/Footer';
 /**
  * @function
  * @returns {JSX}- jsx
@@ -15,9 +11,6 @@ import SucessStories from './layout/SuccessStories';
 const LandingPage = () => {
   return (
     <div className="container">
-      <Navbar />
-      <SignInLink />
-      <SignOutLink />
       <div className="hero2">
         <h1>
           Why Eat Junks?

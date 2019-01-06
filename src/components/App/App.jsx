@@ -7,6 +7,7 @@ import history from '../../helpers/history';
 import Navbar from '../layout/Navbar';
 import '../../index.css';
 import orderHistory from '../orderHistory/orderHisoryContainer';
+import Order from '../orders/OrderContainer';
 /**
  * This Class use various imported Components and display on the webpage
  * @returns {string} - returns jsx
@@ -19,6 +20,7 @@ const App  = () => {
         <Route exact path='/' component={LandingPage} />
         <Route path='/login' component={SignIn} />
         <Route path='/signup' component={SignUp} />
+        <Route path="/order" component={Order} />
         <Route path='/customer/order' component={orderHistory} />
       </div>
     </Router>

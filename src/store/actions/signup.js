@@ -2,6 +2,9 @@ import axios from 'axios';
 import history from '../../helpers/history';
 import * as actionType from './actionType';
 
+const url = 'https://fast-foodd.herokuapp.com/api/v1';
+// const url = 'http://localhost:3000/api/v1';
+
 export const signUpSuccess = (data) => {
   return {
     type: actionType.SIGNUP_SUCCESS,
@@ -12,7 +15,7 @@ export const signUpSuccess = (data) => {
 export const signUpFail = (err) =>{
   return {
     type: actionType.SIGNUP_FAIL,
-    payload: err
+    payload: err.response.data.message
   };
 };
 
@@ -23,15 +26,16 @@ export const signUpStart = () => {
 };
 
 export const signUpUser = (user) => {
-  return dispatch => {
+  return async dispatch => {
     dispatch(signUpStart());
-    axios.post('https://fast-foodd.herokuapp.com/api/v1/auth/signup', {
+    return axios.post(`${url}/auth/signup`, {
       ...user
     }).then(response => {
       dispatch(signUpSuccess(response.data));
-      history.push('/login');
+      localStorage.setItem('token', response.data.data.token);
+      history.push('/');
     }).catch(err => {
-      dispatch(signUpFail(err.response.data.message));
+      dispatch(signUpFail(err));
     });
   };
 };

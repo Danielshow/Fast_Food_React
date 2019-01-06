@@ -34,8 +34,8 @@ describe('LandingPage renders successfully', () => {
     const wrapper = shallow(<SignOutLink />);
     const listWrapper = wrapper.find('ul');
     const list = wrapper.find('li');
-    expect(listWrapper.length).toBe(1);
-    expect(list.length).toBe(4);
+    expect(listWrapper.length).toBe(2);
+    expect(list.length).toBe(5);
   });
 
   it('Renders AboutUs component', () => {

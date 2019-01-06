@@ -7,7 +7,6 @@ describe('Reducers test', () => {
       response: null,
       error: null,
       loading: false,
-      token: null
     });
   });
 
@@ -16,12 +15,10 @@ describe('Reducers test', () => {
       response: null,
       error: null,
       loading: false,
-      token: null
     }, {type: actionTypes.AUTH_START})).toEqual({
       response: null,
       error: null,
       loading: true,
-      token: null
     });
   });
 
@@ -30,15 +27,11 @@ describe('Reducers test', () => {
       response: null,
       error: null,
       loading: false,
-      token: null
-    }, {type: actionTypes.AUTH_SUCCESS, payload: {
-      message: 'me',
-      data: {token: 'yes'}
-    }})).toEqual({
-      response: 'me',
+    }, {type: actionTypes.AUTH_SUCCESS
+      })).toEqual({
+      response: null,
       error: false,
       loading: false,
-      token: 'yes'
     });
   });
 
@@ -47,26 +40,10 @@ describe('Reducers test', () => {
       response: null,
       error: null,
       loading: false,
-      token: null
     }, {type: actionTypes.AUTH_FAIL, payload: 'any_stuff'})).toEqual({
       response: 'any_stuff',
       error: true,
       loading: false,
-      token: null
-    });
-  });
-
-  it('should update state if authLogout action is called', () => {
-    expect(reducers({
-      response: null,
-      error: null,
-      loading: false,
-      token: null
-    }, {type: actionTypes.AUTH_LOGOUT})).toEqual({
-      response: null,
-      error: null,
-      loading: false,
-      token: null
     });
   });
 
@@ -75,12 +52,10 @@ describe('Reducers test', () => {
       response: null,
       error: null,
       loading: false,
-      token: null
     }, {type: actionTypes.AUTH_CLEAR_RESPONSE})).toEqual({
       response: null,
       error: null,
       loading: false,
-      token: null
     });
   });
 });

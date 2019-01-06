@@ -2,10 +2,12 @@ import axios from 'axios';
 import * as actionType from './actionType';
 import history from '../../helpers/history';
 
-export const postSignIn = (response) => {
+const url = 'https://fast-foodd.herokuapp.com/api/v1';
+// const url = 'http://localhost:3000/api/v1';
+
+export const postSignIn = () => {
   return {
-    type: actionType.AUTH_SUCCESS,
-    payload: response
+    type: actionType.AUTH_SUCCESS
   };
 };
 
@@ -22,18 +24,10 @@ export const authStart = () => {
   };
 };
 
-export const authLogout = () => {
-  return {
-    type: actionType.AUTH_LOGOUT
-  };
-};
-
 export const logoutUser = () => {
-  return dispatch => {
-    setTimeout(()=> {
-      dispatch(authLogout());
-    }, 3600 * 1000);
-  };
+  setTimeout(()=> {
+    localStorage.setItem('token', null);
+  }, 3600 * 1000);
 };
 
 export const clearResponse = () => {
@@ -43,14 +37,15 @@ export const clearResponse = () => {
 };
 
 export const signInUser = (user) => {
-  return dispatch => {
+  return async dispatch => {
     dispatch(authStart());
-    axios.post('https://fast-foodd.herokuapp.com/api/v1/auth/login', {
+    return axios.post(`${url}/auth/login`, {
       email: user.email,
       password: user.password
     }).then(response => {
-      dispatch(postSignIn(response.data));
-      dispatch(logoutUser());
+      dispatch(postSignIn());
+      localStorage.setItem('token', response.data.data.token);
+      logoutUser();
       history.push('/');
     }).catch(err => {
       dispatch(loginFailed(err.response.data.message));

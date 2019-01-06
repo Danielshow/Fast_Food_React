@@ -1,13 +1,27 @@
+import moxios from 'moxios';
+import thunk from 'redux-thunk';
+import configureMockStore from 'redux-mock-store';
+import mockData from '../mockData';
 import * as actionType from '../../../store/actions/actionType';
 import * as signInActions from '../../../store/actions/signIn';
+import * as act from '../../../store/actions/orderHistory';
 
+
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
+
+const url = 'https://fast-foodd.herokuapp.com/api/v1';
 describe('SignIn Actions', () => {
+  beforeEach(() => {
+    moxios.install();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
   it('should return an action if postignin is called', () => {
-    const response = 'some-text';
-    expect(signInActions.postSignIn(response)).toHaveProperty('type');
-    expect(signInActions.postSignIn(response)).toHaveProperty('payload');
-    expect(signInActions.postSignIn(response).payload).toEqual(response);
-    expect(signInActions.postSignIn(response).type).toEqual(
+    expect(signInActions.postSignIn()).toHaveProperty('type');
+    expect(signInActions.postSignIn().type).toEqual(
       actionType.AUTH_SUCCESS);
   });
 
@@ -26,19 +40,43 @@ describe('SignIn Actions', () => {
       actionType.AUTH_START);
   });
 
-  it('should return an action if authLogout is called', () => {
-    expect(signInActions.authLogout()).toHaveProperty('type');
-    expect(signInActions.authLogout().type).toEqual(
-      actionType.AUTH_LOGOUT);
-  });
-
   it('should return an action if logoutUser is called', () => {
     expect(signInActions.logoutUser()).toHaveBeenCalled;
   });
 
-  it('should return an action if signInUser is called',() => {
-    expect(signInActions.signInUser()).toHaveBeenCalled;
-    expect(typeof signInActions.signInUser()).toBe('function');
+  it('should return an action if signInUser is called',async () => {
+    moxios.stubRequest(`${url}/auth/login`, {
+      status: 200,
+      response: mockData.authResponse
+    });
+    const expectedActions = [
+      {type: actionType.AUTH_START},
+      {type: actionType.AUTH_SUCCESS}
+    ];
+    const store = mockStore({});
+    return store.dispatch(signInActions.signInUser(mockData.signinData))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(signInActions.logoutUser()).toBeCalled;
+    });
+  });
+
+  it('should return an error if signInUser is called',async () => {
+    moxios.stubRequest(`${url}/auth/login`, {
+      status: 404,
+      response: mockData.authResponse
+    });
+    const expectedActions = [
+      {type: actionType.AUTH_START},
+      {type: actionType.AUTH_FAIL, payload: mockData.authResponse.err},
+    ];
+
+    const store = mockStore({});
+
+    return store.dispatch(signInActions.signInUser(mockData.signinData))
+    .then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('should return an action if clearResponse is called', () => {

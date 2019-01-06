@@ -7,7 +7,7 @@ const SignInLink = () => (
       <ul>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to="/login">Login</NavLink></li>
-        <li><NavLink to="/">Order</NavLink></li>
+        <li><NavLink to="/order">Order</NavLink></li>
       </ul>
     </nav>
   </div>

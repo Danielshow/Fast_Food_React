@@ -6,7 +6,7 @@ const SignOutLink = () => (
     <nav>
       <ul>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/">Order</NavLink></li>
+        <li><NavLink to="/order">Order</NavLink></li>
         <li className="dropwelcome">
             Welcome ↓
           <ul className="dropdown">

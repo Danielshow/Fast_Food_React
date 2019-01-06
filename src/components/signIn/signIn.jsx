@@ -8,7 +8,6 @@ import SignInForm from './signInForm';
  */
 const signIn = (
   {loading, error, response, authSignInUser, token, authClearResponse}) => {
-  token? localStorage.setItem('token', token): null;
   return (
     <div className="signinContainer">
       { loading===true? <Spinner />:null}

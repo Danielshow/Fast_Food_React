@@ -6,13 +6,15 @@ import { Provider } from 'react-redux';
 import App from './components/App/App';
 import signUpReducer from './store/reducers/signup';
 import signInReducer from './store/reducers/signin';
+import orderHistoryReducer from './store/reducers/orderHistory';
 
 // eslint-disable-next-line
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   in: signInReducer,
-  up: signUpReducer
+  up: signUpReducer,
+  ordHistory: orderHistoryReducer
 });
 const store = createStore(
   rootReducer, composeEnhancers(applyMiddleware(thunk)));

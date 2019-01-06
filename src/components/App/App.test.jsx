@@ -10,7 +10,7 @@ describe('App renders successfully', () => {
 
   it('Renders Landing Page', () => {
     const wrapper = shallow(<App />);
-    const header = wrapper.find('Header');
+    const header = wrapper.find('Navbar');
     expect(header.length).toBe(1);
   });
 });

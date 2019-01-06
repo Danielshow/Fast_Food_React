@@ -21,63 +21,100 @@ body, ul{
   position: fixed;
   width: 100%;
   background-color: #e06c41;
-  transition: 0.7s; 
-  z-index: 200;
+  z-index: 10;
+  top: 0;
 }
 
 .brand {
     font-size: 1.325rem;
     color: #e2dcdc;
     text-decoration: none;
+    float: left;
     padding-left: 20px;}
 
-    /* signout links */
-.signout {
-  position: absolute;
-  z-index: 300;
-  margin-top: 20px;
-  position: fixed;
-  width: 100%}
-
-.signout ul{
-    float: right
-  }
-
-.signoutlinks li{
-  display: inline-block;
-  list-style-type: none;
-  margin-right: 10px;
-  background: #fff;
-  padding: 5px;
-  border: 1px solid #fff;}
-
-.signoutlinks ul a{
+.brand a {
   text-decoration: none;
-  color: black;
+  color: #e2dcdc;
 }
-/* signin links */
-.signin {
-  position: absolute;
-  z-index: 200;
-  margin-top: 20px;
-  position: fixed;
+
+.navList {
+  margin-top: 0;
   width: 100%}
 
-.signin ul{
-    float: right
+nav {
+  float: right;
+  margin-right: 80px;
+}
+
+nav ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 40px;
+  padding-top: 28px;
+  position: relative;
+}
+
+nav a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+nav ul li ul a::before,
+nav a::before {
+  content: '';
+  display: block;
+  height: 4px;
+  width: 0%;
+  background-color: #fff;
+  position: absolute;
+  transition: all ease-in-out 250ms;
+  margin-top: -5px;
+}
+
+nav ul li ul a:hover::before,
+nav a:hover::before {
+  width: 100%;
+}
+
+nav ul li ul{
+    position: absolute;
+    display: none;
+    margin-top: 0;
+    background-color: #e06c41;
+    text-align: center;
+    padding-bottom: 20px;
+    border-radius: 5px;
   }
 
-.signinlinks li{
-  display: inline-block;
-  list-style-type: none;
-  margin-right: 10px;
-  background: #fff;
-  padding: 5px;
-  border: 1px solid #fff;}
+nav ul li ul li{
+  margin-left: 0;
+  padding-top: 20px;
+  animation-name: listanim;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+}
+  
 
-.signinlinks ul a{
-  text-decoration: none;
-  color: black;
+  nav ul li:hover > ul,
+  nav ul li ul:hover {
+    display: block;
+  }
+
+@keyframes listanim {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.dropwelcome {
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase;
 }
 
 /* Hero Starting point*/
@@ -566,4 +603,113 @@ hr {
 @keyframes toast{
   0% {transform:translate(100%)rotateX(180deg)}
   100% {transform: translate(0%)}
+}
+
+/* order history container */
+.orderContainer {
+  width: 100%;
+  min-height: 100vh;
+  background-size: 500px 400px;
+  background-repeat: no-repeat;
+  background-position: 20%;
+  background-color: #e06c4236;
+  animation-name: order;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  padding-top: 60px;
+  text-align: center;
+}
+
+
+.orderhistory {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.orderhistory table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: 0px auto;
+}
+
+.orderhistory td,th {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.orderhistory th{
+  background-color: hsla(16, 72%, 57%, 0.782);
+}
+
+.orderhistory tbody:nth-child(odd) {
+  background-color: #fff;
+}
+
+@keyframes order{
+  0%{opacity: 0;}
+  100%{opacity: 1;}
+  }
+
+/* order details */
+.orderdetails {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: hsla(0, 0%, 0%, 0.68);
+  overflow: hidden;
+  animation-name: orderdetails;
+  animation-duration: 1s;
+}
+
+@keyframes orderdetails {
+  0% {transform: scale(2)}
+  100% {transform: unset}
+}
+
+.orderwidth {
+  position: relative;
+  top: 20%;
+  width: 50%;
+  height: 50vh;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid white;
+  border-radius: 20px;
+  box-shadow: 2px 4px 8px black;
+}
+
+.close {
+  float: right;
+  margin-right: 20px;
+  font-size: 40px;
+  margin-top: 0px;
+  cursor: pointer;
+}
+
+.view {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.view:hover {
+  background-color: #e06c41;
+}
+
+.orderwidth table {
+  width: 80%;
+  margin: 0 auto;
+  clear: both;
+}
+
+.orderwidth td,th {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.orderwidth th{
+  background-color: hsla(16, 72%, 57%, 0.782);
+}
+
+.orderwidth tbody:nth-child(odd) {
+  background-color: hsla(16, 72%, 57%, 0.524);
 }

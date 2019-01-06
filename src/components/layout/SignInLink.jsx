@@ -2,14 +2,14 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const SignInLink = () => (
-  <div className="signin">
-    <div className="signinlinks">
+  <div className="navList">
+    <nav>
       <ul>
-        <NavLink to='/'><li>Home</li></NavLink>
-        <NavLink to="/login"><li>Login</li></NavLink>
-        <NavLink to="/"><li>Order</li></NavLink>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to="/login">Login</NavLink></li>
+        <li><NavLink to="/">Order</NavLink></li>
       </ul>
-    </div>
+    </nav>
   </div>
 );
 

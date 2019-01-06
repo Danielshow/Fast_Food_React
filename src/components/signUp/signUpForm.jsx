@@ -30,7 +30,6 @@ class signUpForm extends Component {
       passwordError: false,
       confirmpassword: '',
       name: '',
-      address: '',
       cpasswordError: false,
       warning: null,
     };
@@ -152,7 +151,7 @@ class signUpForm extends Component {
    */
   render() {
     const {state: { password, email, emailError, confirmpassword,
-      name, address, passwordError, localResponse, cpasswordError, warning},
+      name, passwordError, localResponse, cpasswordError, warning},
       props: {error, response}} = this;
     let warningDisplay = null;
     if (warning) {
@@ -166,7 +165,7 @@ class signUpForm extends Component {
             <label htmlFor="email">Email</label>
             <br />
             <input
-              type="email" 
+              type="email"
               id="email"
               value={email}
               onChange={this.handleChange}
@@ -207,17 +206,6 @@ class signUpForm extends Component {
               onChange={this.handleChange}
               required
               className={cpasswordError? 'inValid': 'valid'}
-            />
-          </div>
-          <div className="input-field">
-            <label htmlFor="address">Address</label>
-            <br />
-            <input
-              type="text"
-              id="address"
-              value={address}
-              onChange={this.handleChange}
-              required
             />
           </div>
           {error ===true? <p className="errorMessage">{response}</p>:null}

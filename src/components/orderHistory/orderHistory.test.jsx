@@ -7,8 +7,9 @@ import { mapDispatchToProps, mapStateToProps } from './orderHisoryContainer';
 
 describe('OrderHistory', () => {
   let wrapper;
+  const myOrders = [{id:1}, {id:2}];
   beforeEach(() => {
-  wrapper = shallow(<OrderHistory />);
+  wrapper = shallow(<OrderHistory myOrders={myOrders} />);
   });
 
 
@@ -25,6 +26,18 @@ describe('OrderHistory', () => {
     const wrap = shallow(<OrderHistory />);
     wrap.setProps({isUserGotten: true});
   });
+
+  it('should call td and simulate click', () => {
+    wrapper.setState({
+      modal: true
+    });
+    const td = wrapper.find('td');
+    const handleClick = jest.fn();
+    td.at(0).simulate('click');
+
+    expect(handleClick).toHaveBeenCalled;
+    expect(wrapper.state().modal).toEqual(true);
+  });
 });
 
 describe('Order History container', () => {
@@ -37,24 +50,23 @@ describe('Order History container', () => {
   });
 });
 
-describe('#View Details', () => {
-  let wrapper, orders;
-  beforeEach(() => {
-    orders = {
-      quantity: '1,8,9',
-      food: 'llll,kkk,kkk'
-    };
-    wrapper = shallow(<ViewDetails orders={orders} removeModal={() => {}} />);
-  });
+  describe('#View Details', () => {
+    let wrapper, orders;
+    beforeEach(() => {
+      orders = {
+        quantity: '1,8,9',
+        food: 'llll,kkk,kkk'
+      };
+      wrapper = shallow(<ViewDetails orders={orders} removeModal={() => {}} />);
+    });
 
-  it('should render View Details', () => {
-    shallow(<ViewDetails orders={orders} removeModal={() => {}} />);
-  });
+    it('should render View Details', () => {
+      shallow(<ViewDetails orders={orders} removeModal={() => {}} />);
+    });
 
-  it('should call on onClick function if h1 is clicked', () => {
-    const input = wrapper.find('h1');
-    input.simulate('click');
-    expect(wrapper.prop('removeModal')).toBeCalled;
+    it('should call on onClick function if h1 is clicked', () => {
+      const input = wrapper.find('h1');
+      input.simulate('click');
+      expect(wrapper.props().removeModal).toBeCalled;
+    });
   });
-
-});

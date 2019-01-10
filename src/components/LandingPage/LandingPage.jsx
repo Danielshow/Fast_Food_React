@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AboutUs from './AboutUs';
 import RecentFood from './RecentFood';
 import SucessStories from './SuccessStories';
@@ -19,12 +20,9 @@ const LandingPage = () => {
           <br />
         We got you covered!!
         </h1>
-        <a href="./order-list.html">
+        <Link to="/order">
           <button type="button" className="button1">Order Food</button>
-        </a>
-        <a href="#contact">
-          <button type="button" className="button2">Contact Us</button>
-        </a>
+        </Link>
       </div>
       <div className="wrapper">
         <AboutUs />

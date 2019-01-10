@@ -50,7 +50,7 @@ describe('Signup Container', () => {
   });
 });
 
-describe('Renders Signin Form', () => {
+describe('Renders SignUpForm Form', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(<SignUpForm />);
@@ -61,22 +61,6 @@ describe('Renders Signin Form', () => {
     input.at(0).simulate(
       'change', {target: {id: 'email', value: 'danielshotonwa@yahoo.com'}});
     expect(wrapper.state().email).toEqual('danielshotonwa@yahoo.com');
-  });
-
-  it('should change the emailError state if email invalid', () => {
-    const input = wrapper.find('input');
-    input.at(0).simulate(
-      'change', {target: {id: 'email', value: 'danielshotonwayahoo.com'}});
-    expect(wrapper.state().email).toEqual('danielshotonwayahoo.com');
-    expect(wrapper.state().emailError).toEqual(true);
-  });
-
-  it('should change the passwordError state if password is invalid', () => {
-    const input = wrapper.find('input');
-    input.at(0).simulate(
-      'change', {target: {id: 'password', value: 'dan'}});
-    expect(wrapper.state().password).toEqual('dan');
-    expect(wrapper.state().passwordError).toEqual(true);
   });
 
   it('should change the state after name field is changed', () => {
@@ -94,24 +78,6 @@ describe('Renders Signin Form', () => {
     expect(wrapper.state().confirmpassword).toEqual('daniel');
   });
 
-  it('should change the error state if confirm password is not equal', () => {
-    const input = wrapper.find('input');
-    wrapper.setState({password: 'danie'});
-    input.at(1).simulate(
-      'change', {target: {id: 'confirmpassword', value: 'daniel'}});
-    expect(wrapper.state().confirmpassword).toEqual('daniel');
-    expect(wrapper.state().cpasswordError).toEqual(true);
-  });
-
-  it('should change the error state if confirm password is equal', () => {
-    const input = wrapper.find('input');
-    wrapper.setState({confirmpassword: 'daniel'});
-    input.at(1).simulate(
-      'change', {target: {id: 'password', value: 'daniel'}});
-    expect(wrapper.state().confirmpassword).toEqual('daniel');
-    expect(wrapper.state().cpasswordError).toEqual(false);
-  });
-
   it('should change the state after address field is changed', () => {
     const input = wrapper.find('input');
     input.at(1).simulate(
@@ -126,14 +92,6 @@ describe('Renders Signin Form', () => {
     expect(wrapper.state().password).toEqual('daniel');
   });
 
-  it('should return error if submit button is clicked', () => {
-    wrapper.setState({emailError: true, passwordError: true});
-    const fakeEvent = { preventDefault: () => {}};
-    const form = wrapper.find('form').simulate('submit', fakeEvent);
-    expect(form).toBeCalled;
-    expect(wrapper.state().warning).toEqual('Some fields are Invalid');
-  });
-
   it('should submit if submit button is clicked', () => {
     wrapper.setProps({SignUpUser: () => {}});
     const fakeEvent = { preventDefault: () => {}};
@@ -145,6 +103,6 @@ describe('Renders Signin Form', () => {
   it('check if errorMessage is called', () => {
     wrapper.setProps({'error': true});
     const error = wrapper.find('.errorMessage');
-    expect(error.length).toBe(2);
+    expect(error.length).toBe(1);
   });
 });

@@ -1,17 +1,22 @@
 import { connect } from 'react-redux';
 import Order from './Order';
-import {getFoodsFromAPI} from '../../store/actions/order';
+import {getFoodsFromAPI, orderFood, getUserFromToken }
+  from '../../store/actions/order';
 
 export const mapStateToProps = state => {
   return {
     foods: state.ord.foods,
-    loading: state.ord.loading
+    loading: state.ord.loading,
+    isUser: state.ord.isUser,
+    email: state.ord.email
   };
 };
 
 export const mapDispatchToProps = dispatch => {
   return {
-    getFoods: () => {dispatch(getFoodsFromAPI());}
+    getFoods: () => {dispatch(getFoodsFromAPI());},
+    orderFood: (food) => {dispatch(orderFood(food));},
+    getUserFromToken: () => {dispatch(getUserFromToken());}
   };
 };
 

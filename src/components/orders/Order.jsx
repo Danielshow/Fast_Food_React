@@ -1,25 +1,119 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
-
-
+import OrderConfirmation from './orderConfirmation';
+import OrderDetails from './OrderDetails';
+import history from '../../helpers/history';
 /**
  * @class
  */
 class Order extends Component {
     /**
+     * @constructor
+     */
+    constructor() {
+      super();
+      this.state = {
+        orders: [],
+        total: 0,
+        modal: false,
+      };
+    }
+    /**
    * @description - Get menu from API
    * @returns {list} menu of foods
    */
   componentDidMount() {
-    const { getFoods } = this.props;
+    const { getFoods, getUserFromToken } = this.props;
     getFoods();
+    const order = JSON.parse(localStorage.getItem('myOrders'));
+    if (order) {
+      this.setState({
+        orders: order.orders,
+        total: order.total
+      });
+    }
+    getUserFromToken();
+  }
+
+  /**
+   * @description - Get menu from API
+   * @returns {list} menu of foods
+   */
+  componentDidUpdate() {
+    localStorage.setItem('myOrders', JSON.stringify(this.state));
+  }
+
+    /**
+   * @param {string} food
+   * @return {object} - updated state
+   */
+  handleClick = (food) => {
+    const { orders, total } = this.state;
+    const orderso = orders.filter((order) => {
+      if (order.id === food.id) {
+        food.quantity = order.quantity + 1;
+        food.tprice = food.price * food.quantity;
+      }
+      return food.id !== order.id;
+    });
+
+    if (!food.quantity) {
+      food.quantity = 1;
+      food.tprice = food.price;
+    }
+
+    const myorders = [...orderso, food];
+    this.setState({
+      orders: myorders,
+      total: total+Number(food.price)
+    });
+  }
+
+  /**
+   * @param {int} id
+   * @return {object} - updated state
+   */
+  handleRemove = (id) => {
+    const { orders, total } = this.state;
+    let newTotal;
+    const updatedOrders = orders.filter((order) => {
+      if(order.id === id) {
+        newTotal = total - Number(order.price * order.quantity);
+        order.tprice = 0;
+        order.quantity = 0;
+      }
+      return order.id !== id;
+    });
+
+    this.setState({
+      orders: updatedOrders,
+      total: newTotal
+    });
+  }
+
+  removeModal = () => {
+    this.setState({
+      modal: false,
+    });
+  }
+
+  displayModal = () => {
+    const { isUser } = this.props;
+    if (isUser) {
+      this.setState({
+        modal: true,
+      });
+    } else {
+      history.push('/login');
+    }
   }
   /**
    * @returns {JSX} returns JSX
-   */
+  */
   render() {
-    const {loading, foods} = this.props;
+    const { state: { orders, total, modal, isUser },
+      props: {loading, foods, orderFood} } = this;
     const foodList = foods.map(food => {
       return (
         <div className="food" key={food.id}>
@@ -30,22 +124,34 @@ class Order extends Component {
             ₦
             {food.price}
           </p>
-          <button type="button" className="foodButton">Add to Cart</button>
+          <button
+            onClick={() => this.handleClick(food)}
+            type="button"
+            className="foodButton"
+          >
+              Add to Cart
+          </button>
         </div>
       );
     });
     return (
       <div className="orderContainer">
+        {modal?
+          // eslint-disable-next-line
+          <OrderConfirmation removeModal={this.removeModal} orders={orders} total={total} orderFood={orderFood} />:null}
         {loading?<Spinner />:null}
         <div className="foodContainer">
           {foods.length < 1? <h3>No Foood Available</h3>:null}
           {foodList}
         </div>
-        <div className="ordersPanel">
-          <div className="innerPanel">
-            <h3> Cart </h3>
-          </div>
-        </div>
+        <OrderDetails
+          orders={orders}
+          total={total}
+          displayModal={this.displayModal}
+          handleRemove={this.handleRemove}
+          orderFood={orderFood}
+          isUser={isUser}
+        />
       </div>
     );
   }
@@ -54,14 +160,20 @@ class Order extends Component {
 Order.propTypes = {
   getFoods: PropTypes.func,
   loading: PropTypes.bool,
+  orderFood: PropTypes.func,
   // eslint-disable-next-line
-  foods: PropTypes.array
+  foods: PropTypes.array,
+  getUserFromToken: PropTypes.func,
+  isUser: PropTypes.bool
 };
 
 Order.defaultProps = {
   foods: [],
   getFoods: () => {},
-  loading: false
+  loading: false,
+  orderFood: () => {},
+  getUserFromToken: () => {},
+  isUser: false
 };
 
 export default Order;

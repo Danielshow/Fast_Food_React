@@ -5,12 +5,9 @@ import PropTypes from 'prop-types';
 import {
   Link
 } from 'react-router-dom';
-import {
-  isEmailValid,
-  isPasswordValid,
-  isPasswordAndConfirmPasswordEqual
-} from '../../helpers/authHelpers';
 import Toast from '../layout/Toast';
+import validate from '../../helpers/validation';
+import { isPasswordAndConfirmPasswordEqual } from '../../helpers/authHelpers';
 
 /**
  * @class
@@ -23,93 +20,43 @@ class signUpForm extends Component {
   constructor() {
     super();
     this.state = {
+      localerror: {},
       password: '',
       email: '',
-      emailError: false,
-      localResponse: null,
-      passwordError: false,
       confirmpassword: '',
       name: '',
-      cpasswordError: false,
       warning: null,
     };
   }
 
   /**
-   * @param {object} e
-   * @returns {object} - state
+   * @param {*} e - event
+   * @returns {object} - Changed state
    */
   handleChange = (e) => {
-    const {
-      password,
-      confirmpassword
-    } = this.state;
-    if (e.target.id === 'email' && !isEmailValid(e.target.value)) {
-      this.setState({
-        emailError: true,
+    const { localerror } = this.state;
+    const data = { type: e.target.id, content: e.target.value };
+    const rerror = validate(data, localerror);
+    this.setState({
         [e.target.id]: e.target.value,
-        localResponse: 'Invalid Email: Provide a valid email',
-        warning: null
-      });
-    } else if (e.target.id === 'password' && !isPasswordValid(e.target.value)) {
+        localerror: rerror
+    }, () => {
+      this.validateConfirmPassword();
+    });
+  }
+
+  validateConfirmPassword = () => {
+    const { password, confirmpassword, localerror } = this.state;
+    const perror = { ...localerror };
+    if (!isPasswordAndConfirmPasswordEqual(password, confirmpassword)) {
+      perror.confirmPassword = true;
       this.setState({
-        passwordError: true,
-        [e.target.id]: e.target.value,
-        localResponse: 'Password length must be a minimum of six characters',
-        warning: null
-      });
-    } else if (e.target.id === 'password' &&
-      !isPasswordAndConfirmPasswordEqual(confirmpassword, e.target.value)) {
-      this.setState({
-        passwordError: true,
-        [e.target.id]: e.target.value,
-        localResponse: 'Password and confirm password not equal',
-        warning: null
-      });
-    } else if (e.target.id === 'confirmpassword' &&
-      !isPasswordAndConfirmPasswordEqual(password, e.target.value)) {
-      this.setState({
-        [e.target.id]: e.target.value,
-        localResponse: 'Password and confirm password not equal',
-        cpasswordError: true,
-        warning: null
-      });
-    } else if (e.target.id === 'confirmpassword' && e.target.value.length > 5) {
-      this.setState({
-        [e.target.id]: e.target.value,
-        localResponse: null,
-        cpasswordError: false,
-        warning: null,
-        passwordError: false
-      });
-    } else if (e.target.id === 'password') {
-      if (e.target.value === confirmpassword){
-        this.setState({
-          passwordError: false,
-          cpasswordError: false,
-          [e.target.id]: e.target.value,
-          localResponse: null,
-          warning: null
-        });
-      }
-      this.setState({
-        passwordError: false,
-        [e.target.id]: e.target.value,
-        localResponse: null,
-        warning: null
-      });
-    } else if (e.target.id === 'email') {
-      this.setState({
-        emailError: false,
-        [e.target.id]: e.target.value,
-        localResponse: null,
-        warning: null
+        localerror: perror,
       });
     } else {
+      delete perror.confirmPassword;
       this.setState({
-        [e.target.id]: e.target.value,
-        localResponse: null,
-        warning: null
+        localerror: perror,
       });
     }
   }
@@ -119,17 +66,15 @@ class signUpForm extends Component {
    */
   handleSubmit = async (e) => {
     const {
-      emailError,
-      passwordError,
+      localerror,
       email,
       password,
       confirmpassword,
       address,
       name,
-      cpasswordError
     } = this.state;
     e.preventDefault();
-    if (emailError || passwordError || cpasswordError) {
+    if (Object.keys(localerror).length > 0) {
       this.setState({
         warning: 'Some fields are Invalid'
       });
@@ -150,8 +95,7 @@ class signUpForm extends Component {
    * @returns {HTML}- JSX
    */
   render() {
-    const {state: { password, email, emailError, confirmpassword,
-      name, passwordError, localResponse, cpasswordError, warning},
+    const {state: {warning, localerror},
       props: {error, response}} = this;
     let warningDisplay = null;
     if (warning) {
@@ -167,9 +111,9 @@ class signUpForm extends Component {
             <input
               type="email"
               id="email"
-              value={email}
               onChange={this.handleChange}
-              className={emailError ? 'inValid' : 'valid'}
+              className={localerror.email ? 'inValid' : 'valid'}
+              placeholder='email@email.com'
               required
             />
           </div>
@@ -179,9 +123,10 @@ class signUpForm extends Component {
             <input
               type="text"
               id="name"
-              value={name}
+              className={localerror.name ? 'inValid' : 'valid'}
               onChange={this.handleChange}
               required
+              placeholder='name'
             />
           </div>
           <div className="input-field">
@@ -190,26 +135,31 @@ class signUpForm extends Component {
             <input
               type="password"
               id="password"
-              value={password}
-              className={passwordError ? 'inValid' : 'valid'}
+              className={localerror.password ? 'inValid' : 'valid'}
               onChange={this.handleChange}
               required
+              placeholder='password'
             />
           </div>
+          <p className='small-text'>
+            Password must not be less than six characters
+          </p>
           <div className="input-field">
             <label htmlFor="confirmpassword">Confirm Password</label>
             <br />
             <input
               type="password"
               id="confirmpassword"
-              value={confirmpassword}
               onChange={this.handleChange}
               required
-              className={cpasswordError? 'inValid': 'valid'}
+              className={localerror.confirmPassword? 'inValid': 'valid'}
+              placeholder='confirm password'
             />
           </div>
+          <p className='small-text'>
+            Confirm password must be equal to password
+          </p>
           {error ===true? <p className="errorMessage">{response}</p>:null}
-          <p className="errorMessage">{localResponse}</p>
           <div className="input-field">
             <button
               type="submit"

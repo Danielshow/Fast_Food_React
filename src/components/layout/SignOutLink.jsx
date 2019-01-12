@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const SignOutLink = () => (
   <div className="signout">
@@ -12,12 +12,12 @@ const SignOutLink = () => (
           <ul className="dropdown">
             <li><NavLink to="/customer/order">My Order</NavLink></li>
             <li>
-              <a
-                href="/"
-                onClick={() => localStorage.setItem('token', null)}
+              <Link
+                to="/"
+                onClick={() => localStorage.clear()}
               >
                 Logout
-              </a>
+              </Link>
             </li>
           </ul>
         </li>

@@ -46,7 +46,7 @@ export const signInUser = (user) => {
       dispatch(postSignIn());
       localStorage.setItem('token', response.data.data.token);
       logoutUser();
-      history.push('/');
+      history.push('/order');
     }).catch(err => {
       dispatch(loginFailed(err.response.data.message));
     });

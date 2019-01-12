@@ -13,3 +13,18 @@ export const isPasswordAndConfirmPasswordEqual = (
   password, confirmpassword) => {
   return password === confirmpassword;
 };
+
+export const isValidPhoneNumber = (number) => {
+  const re = /^([0-9]){11}$/;
+  return re.test(number);
+};
+
+export const isAddressValid = (address) => {
+  const re = /^([a-zA-Z0-9/-]{5,})/;
+  return re.test(address);
+};
+
+export const isNameValid = (name) => {
+  const re = /^([a-zA-Z._']{3,})/;
+  return re.test(name);
+};

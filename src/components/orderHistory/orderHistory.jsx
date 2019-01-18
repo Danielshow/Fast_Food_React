@@ -71,7 +71,7 @@ class orderHistory extends Component {
       );
     });
     return (
-      <div className="orderContainer">
+      <div className="orderHistoryContainer">
         {modal?
           <ViewDetails orders={response} removeModal={this.removeModal} />:null}
         {loading?<Spinner />:null}

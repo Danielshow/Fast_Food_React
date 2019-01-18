@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Charm|Quicksand|Raleway');
 
-body, ul{
+body {
   margin: 0;
   padding: 0;
   font-family: 'Quicksand', sans-serif;
@@ -15,13 +15,14 @@ body, ul{
   background-position: center center;
   overflow-x: hidden;
   background-attachment: fixed;
+  z-index: -1;
 }
 /* navbar */
 .navbar {
   position: fixed;
   width: 100%;
   background-color: #e06c41;
-  z-index: 10;
+  z-index: 0;
   top: 0;
 }
 
@@ -41,7 +42,7 @@ body, ul{
   margin-top: 0;
   width: 100%}
 
-nav {
+.navList nav {
   float: right;
   margin-right: 80px;
 }
@@ -65,8 +66,8 @@ nav a {
   color: #fff;
 }
 
-nav ul li ul a::before,
-nav a::before {
+.navList nav ul li ul a::before,
+.navList nav a::before {
   content: '';
   display: block;
   height: 4px;
@@ -432,6 +433,7 @@ hr {
   animation-name: signin;
   animation-duration: 1s;
   animation-fill-mode: forwards;
+  z-index: -1;
 }
 
 @keyframes signin{
@@ -440,13 +442,13 @@ hr {
 }
 
 .signinForm {
-  position: absolute;
   background-color: #fff;
-  left: 60%;
+  margin-left: 60%;
   height: 100vh;
   width: 40%;
   overflow: hidden;
   text-align: center;
+  z-index: -1;
 }
 
 .content {
@@ -530,7 +532,7 @@ hr {
   height: 100vh;
   width: 100%;
   background-image: url('../images/image/text-animation-1s-280x100px\ \(1\).svg');
-  z-index: 1000;
+  z-index: 2;
   background-size: 50% 50%;
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -561,6 +563,7 @@ hr {
   animation-name: signup;
   animation-duration: 1s;
   animation-fill-mode: forwards;
+  z-index: -1;
 }
 
 @keyframes signup {
@@ -569,7 +572,6 @@ hr {
 }
 
 .signupForm {
-  position: absolute;
   background-color: #fff;
   height: 100vh;
   width: 40%;
@@ -613,9 +615,19 @@ hr {
   background-repeat: no-repeat;
   background-position: 20%;
   background-color: #e06c4236;
-  animation-name: order;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
+  padding-top: 60px;
+  text-align: center;
+  z-index: -1;
+}
+
+.orderHistoryContainer {
+  width: 100%;
+  min-height: 100vh;
+  z-index: -1;
+  background-size: 500px 400px;
+  background-repeat: no-repeat;
+  background-position: 20%;
+  background-color: #e06c4236;
   padding-top: 60px;
   text-align: center;
 }
@@ -645,14 +657,13 @@ hr {
   background-color: #fff;
 }
 
-@keyframes order{
-  0%{opacity: 0;}
-  100%{opacity: 1;}
-  }
-
 /* order details */
 .orderdetails {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   height: 100vh;
   background-color: hsla(0, 0%, 0%, 0.68);
@@ -866,4 +877,188 @@ input::placeholder {
   color: grey;
   font-size: 14px;
   font-weight: lighter;
+}
+
+
+/* admin container  */
+.adminContainer {
+  position: absolute;
+  background-image:linear-gradient(#1111118e, #0a0a0a8e), url("../images/bg/barbecue.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+  width: 100%;
+  min-height: 40vh;
+  z-index: -1;
+  font-family: 'Raleway', sans-serif;
+}
+
+.adminHero {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  color: white;
+  text-align: center;
+  font-size: 130%;
+  text-shadow: 2px 2px rgb(224, 108, 65);
+}
+
+.admin-list{
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.admin-list li {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #e06c41;
+  margin: 5px;
+  cursor: pointer;
+  background-color: #e06c41;
+  border-radius: 5px;
+}
+
+.add-meal {
+  text-align: left;
+  border: 1px solid black;
+  width: 30%;
+  height: 33vh;
+  margin-left: 30px;
+  float: left;
+  border-radius: 10px;
+  box-shadow: 5px 5px 8px black;
+  background-color: #e06b414b;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.add-meal-header {
+  text-align: center;
+}
+
+.admin-input input[type=text], input[type=number] {
+  width: 80%;
+  height: 30px;
+  margin-bottom: 5px;
+  border: 1px solid black;
+  outline: none;
+  margin: 0px auto;
+}
+.admin-btn {
+  padding: 10px;
+  float: right;
+  margin-top: -25px;
+  margin-right: 10%;
+  border-radius: 5px;
+  background-color: #e06c41;
+  border: 1px solid #e06c41;
+}
+
+.list-btn {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #e06c41;
+  border: 1px solid #e06c41;
+  outline: none;
+  margin-top: 10px;
+}
+
+.list-btn:hover {
+  background-color: #fff;
+  transition: 1s;
+}
+
+.response {
+  color: red;
+  margin-top: 0px;
+}
+
+.displayFoods {
+  width: 65%;
+  margin: 0 auto;
+  float: right;
+  margin-top: 20px;
+}
+
+.displayFoods table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: 0px auto;
+}
+
+.displayFoods td,th {
+  border: 1px solid black;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.displayFoods th{
+  background-color: hsla(16, 72%, 57%, 0.782);
+}
+
+.displayFoods tbody:nth-child(odd) {
+  background-color: #fff;
+}
+
+.displayFoods tr:hover {
+  background-color: #e06b418e;
+}
+
+.delete {
+  color: red;
+}
+
+.updateDetails {
+  z-index: 20;
+}
+
+.updateDetails .orderwidth {
+  padding: 20px;
+  width: 20%;
+  height: 40%;;
+  text-align: center;
+}
+
+.updateDetails .admin-input {
+  margin-bottom: 10px;
+}
+.pager {
+  width: 100%;
+  margin-left: -20px;
+} 
+
+.pager .active {
+  background-color: rgb(224, 152, 18) !important;
+}
+
+#orderwidth {
+  top: 30%;
+  width: 25%;
+  height: 20%;
+  padding-top:  40px;
+  text-align: center;
+}
+
+.btn {
+  width: 100px;
+  height: 30px;
+  border: 1px solid #e06c41;
+  border-radius: 5px;
+  padding-top: 6px;
+  margin: 5px;
+  cursor: pointer;
+  display: inline-block;
+  background-color: #e06c41;
+  outline: none;
+}
+
+.btn:hover {
+  background-color: #fff;
+  color: black;
+}
+
+.text-center {
+  text-align: center;
 }

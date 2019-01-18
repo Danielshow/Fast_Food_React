@@ -8,6 +8,7 @@ import Navbar from '../layout/Navbar';
 import '../../index.css';
 import orderHistory from '../orderHistory/orderHisoryContainer';
 import Order from '../orders/OrderContainer';
+import Admin from '../admin/adminContainer';
 /**
  * This Class use various imported Components and display on the webpage
  * @returns {string} - returns jsx
@@ -22,6 +23,7 @@ const App  = () => {
         <Route path='/signup' component={SignUp} />
         <Route path="/order" component={Order} />
         <Route path='/customer/order' component={orderHistory} />
+        <Route path='/admin' component={Admin} />
       </div>
     </Router>
   );

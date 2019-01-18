@@ -17,11 +17,6 @@ describe('OrderHistory', () => {
     shallow(<OrderHistory />);
   });
 
-  it('should render orderContainer class', () => {
-    const container = wrapper.find('.orderContainer');
-    expect(container.length).toEqual(1);
-  });
-
   it('should call getOrderHistory function when isUserGotten is true', () => {
     const wrap = shallow(<OrderHistory />);
     wrap.setProps({isUserGotten: true});

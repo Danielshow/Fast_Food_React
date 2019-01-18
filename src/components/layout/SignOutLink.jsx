@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 const SignOutLink = () => (
-  <div className="signout">
+  <div className="navList">
     <nav>
       <ul>
         <li><NavLink to="/">Home</NavLink></li>

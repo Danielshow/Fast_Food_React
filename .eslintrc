@@ -39,12 +39,6 @@
         "max-len": ["error", 80, 2],
         "new-cap": "error",
         "no-param-reassign": "off",
-        "no-shadow": [
-            "error",
-            {
-                "allow": ["req", "res", "err"]
-            }
-        ],
         "jsx-a11y/label-has-associated-control": [ "error", {
             "required": {
             "some": [ "nesting", "id"  ]
@@ -80,6 +74,7 @@
                 "requireParamDescription": false,
                 "requireReturnDescription": true
             }
-        ]
+        ],
+        "react/forbid-prop-types": 0
     }
 }

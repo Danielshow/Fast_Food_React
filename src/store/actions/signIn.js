@@ -24,12 +24,6 @@ export const authStart = () => {
   };
 };
 
-export const logoutUser = () => {
-  setTimeout(()=> {
-    localStorage.setItem('token', null);
-  }, 3600 * 1000);
-};
-
 export const clearResponse = () => {
   return {
     type: actionType.AUTH_CLEAR_RESPONSE
@@ -45,7 +39,6 @@ export const signInUser = (user) => {
     }).then(response => {
       dispatch(postSignIn());
       localStorage.setItem('token', response.data.data.token);
-      logoutUser();
       history.push('/order');
     }).catch(err => {
       dispatch(loginFailed(err.response.data.message));

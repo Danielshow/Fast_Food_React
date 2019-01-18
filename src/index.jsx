@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ToastProvider } from 'react-toast-notifications';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -14,4 +15,9 @@ const store = createStore(
 
 const root = document.getElementById('root');
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, root);
+ReactDOM.render(
+  <Provider store={store}>
+    <ToastProvider>
+      <App />
+    </ToastProvider>
+  </Provider>, root);

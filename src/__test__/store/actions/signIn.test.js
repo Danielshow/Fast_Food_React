@@ -4,7 +4,6 @@ import configureMockStore from 'redux-mock-store';
 import mockData from '../mockData';
 import * as actionType from '../../../store/actions/actionType';
 import * as signInActions from '../../../store/actions/signIn';
-import * as act from '../../../store/actions/orderHistory';
 
 
 const middlewares = [thunk];
@@ -40,10 +39,6 @@ describe('SignIn Actions', () => {
       actionType.AUTH_START);
   });
 
-  it('should return an action if logoutUser is called', () => {
-    expect(signInActions.logoutUser()).toHaveBeenCalled;
-  });
-
   it('should return an action if signInUser is called',async () => {
     moxios.stubRequest(`${url}/auth/login`, {
       status: 200,
@@ -57,7 +52,6 @@ describe('SignIn Actions', () => {
     return store.dispatch(signInActions.signInUser(mockData.signinData))
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions);
-        expect(signInActions.logoutUser()).toBeCalled;
     });
   });
 

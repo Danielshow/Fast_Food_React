@@ -360,14 +360,6 @@ hr {
   margin: 0px auto;
 }
 
-.imagedescription {
-  background-color: white;
-  min-height: auto;
-  text-align: center;
-  margin: 0px;
-  padding: 0px
-}
-
 .imagedescription p{
   font-size: 16px;
 }
@@ -852,26 +844,26 @@ hr {
 .ordersPanel {
   position: fixed;
   right: 0;
-  top: 6rem;
+  top: 8rem;
   width: 22%;
-  min-height: 85%;
+  min-height: 75%;
   overflow: hidden;
   border: 2px solid #e06c41;
-  background-color:#fff;
+  z-index: 0;
 }
 
 .innerPanel{
   width: 99.%;
   height: 100%;
   border: 2px solid #e06c41;
-  margin: 4px;
+  margin: 5px;
+  padding: 5px;
 }
 
 /* orderfood items */
 .orderedFood {
   width: 200px;
   max-height: 240px;
-  background-color: #fff;
   margin-left: 15px;
   margin-bottom: 10px;
   animation-name: food;
@@ -881,7 +873,6 @@ hr {
 .food {
   width: 200px;
   max-height: 240px;
-  background-color: #fff;
   margin-left: 15px;
   margin-bottom: 20px;
 }
@@ -990,7 +981,7 @@ input::placeholder {
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
   .orderContainer {
     overflow-x: hidden;
   }
@@ -1019,6 +1010,37 @@ input::placeholder {
     min-height: 50%;
   }
 }
+
+@media (min-width: 900px) and (max-width: 1300px) {
+  .orderContainer {
+    overflow-x: hidden;
+  }
+  .food {
+    width: 45%;
+  }
+
+  .food img {
+    width: 100%;
+  }
+  .ordersPanel {
+    width: 30%;
+    min-height: 20vh;
+    top: 10rem;
+    margin: 0px auto;
+    float: right;
+  }
+  .foodContainer {
+    width: 70%;
+    float: left;
+    margin-top: 30px;
+  }
+
+  .orderContainer .orderwidth {
+    width: 90%;
+    min-height: 50%;
+  }
+}
+
 
 /* admin container  */
 .adminContainer {

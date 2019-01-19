@@ -75,7 +75,7 @@ describe('LandingPage renders successfully', () => {
     const aTag = wrapper.find('a');
     const imgTag = wrapper.find('img');
     expect(paragraphCount.length).toBe(2);
-    expect(aTag.length).toBe(8);
+    expect(aTag.length).toBe(5);
     expect(imgTag.length).toBe(4);
   });
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import facebook from '../../../images/icons/facebook.png';
 import google from '../../../images/icons/google-plus.png';
 import linkedIn from '../../../images/icons/linkedin.png';
@@ -18,9 +19,8 @@ const Footer = () => (
     <div className="list">
       <ul>
         <li><a href="#contact_us">About us</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="order-list.html">Order Page</a></li>
-        <li><a href="/">Home</a></li>
+        <li><Link to="/order">Order Page</Link></li>
+        <li><Link to="/">Home</Link></li>
       </ul>
     </div>
     <div className="socials">

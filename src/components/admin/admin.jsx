@@ -46,6 +46,9 @@ export class Admin extends Component {
         price: '',
         response: null
       });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       return false;
     }
     return true;
@@ -135,6 +138,7 @@ export class Admin extends Component {
           deleteResponse, deleteError, deleteSuccess, getFoodsFromAPI }} = this;
     return isAdmin && (
       <div className='adminContainer'>
+        <div className='admin--back' />
         {modal?(
           <UpdateFood
             handleModalState={this.handleModalState}
@@ -190,6 +194,7 @@ export class Admin extends Component {
                   onChange={this.handleChange}
                 />
               </div>
+              <br />
               <button className='admin-btn' type='submit'> Add Food </button>
             </form>
           </div>

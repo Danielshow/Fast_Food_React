@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import '../../__test__/setup/setupEnzyme';
-import Orders from './Order';
+import { Order } from './Order';
 import {mapStateToProps, mapDispatchToProps} from './OrderContainer';
 import OrderDetails from './OrderDetails';
 import OrderConfirmation from './orderConfirmation';
@@ -9,8 +9,11 @@ import combineOrders from '../../helpers/orderHelpers';
 
 describe('### Order Component', () => {
   let wrapper;
+  const props = {
+    toastManager: jest.fn()
+  };
   beforeAll(() => {
-    wrapper = shallow(<Orders />);
+    wrapper = shallow(<Order {...props} />);
   });
 
   it('should display ordercontainer class', () => {

@@ -13,4 +13,14 @@ describe('App renders successfully', () => {
     const header = wrapper.find('Navbar');
     expect(header.length).toBe(1);
   });
+
+  it('should call sideDrawerEventClick', () => {
+    const wrapper = shallow(<App />);
+    wrapper.instance().sideDrawerEventClick();
+  });
+
+  it('should call backDropClick', () => {
+    const wrapper = shallow(<App />);
+    wrapper.instance().backDropClick();
+  });
 });

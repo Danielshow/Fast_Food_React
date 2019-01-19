@@ -60,6 +60,9 @@ export class DisplayFoods extends Component{
       this.setState({
         confirmDialog: !confirmDialog,
       });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       return false;
     }
     return true;
@@ -163,19 +166,20 @@ render() {
 }
 
 DisplayFoods.propTypes = {
-  foods: PropTypes.array.isRequired,
+  foods: PropTypes.array,
   handleUpdate: PropTypes.func.isRequired,
   deleteMenu: PropTypes.func.isRequired,
   deleteError: PropTypes.bool,
   deleteSuccess: PropTypes.bool,
   deleteResponse: PropTypes.string,
-  toastManager: PropTypes.func.isRequired
+  toastManager: PropTypes.object.isRequired
 };
 
 DisplayFoods.defaultProps = {
   deleteError: false,
   deleteSuccess: false,
   deleteResponse: 'djdj',
+  foods: []
 };
 
 export default withToastManager(DisplayFoods);

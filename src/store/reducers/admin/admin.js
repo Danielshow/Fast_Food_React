@@ -6,11 +6,8 @@ const initState = {
   error: false,
   fetchError: null,
   response: null,
-  success: null,
   foods: null,
   fetchResponse: null,
-  updateError: null,
-  updateResponse: null,
   isAdmin: false,
 };
 

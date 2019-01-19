@@ -53,6 +53,9 @@ componentDidMount() {
         appearance: 'success',
         autoDismiss: true,
       });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       this.setState({
         foodImage: '',
         food: '',

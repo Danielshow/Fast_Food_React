@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { withToastManager } from 'react-toast-notifications';
 import Spinner from '../layout/Spinner';
 import OrderConfirmation from './orderConfirmation';
 import OrderDetails from './OrderDetails';
@@ -7,7 +8,7 @@ import history from '../../helpers/history';
 /**
  * @class
  */
-class Order extends Component {
+export class Order extends Component {
     /**
      * @constructor
      */
@@ -99,10 +100,15 @@ class Order extends Component {
   }
 
   displayModal = () => {
-    const { isUser } = this.props;
-    if (isUser) {
+    const { props: { isUser, toastManager}, state: {orders} } = this;
+    if (isUser & orders.length > 0) {
       this.setState({
         modal: true,
+      });
+    } else if(orders.length < 1) {
+      toastManager.add('Cart is empty', {
+        appearance: 'error',
+        autoDismiss: true,
       });
     } else {
       history.push('/login');
@@ -143,15 +149,15 @@ class Order extends Component {
         <div className="foodContainer">
           {foods.length < 1? <h3>No Foood Available</h3>:null}
           {foodList}
+          <OrderDetails
+            orders={orders}
+            total={total}
+            displayModal={this.displayModal}
+            handleRemove={this.handleRemove}
+            orderFood={orderFood}
+            isUser={isUser}
+          />
         </div>
-        <OrderDetails
-          orders={orders}
-          total={total}
-          displayModal={this.displayModal}
-          handleRemove={this.handleRemove}
-          orderFood={orderFood}
-          isUser={isUser}
-        />
       </div>
     );
   }
@@ -164,7 +170,8 @@ Order.propTypes = {
   // eslint-disable-next-line
   foods: PropTypes.array,
   getUserFromToken: PropTypes.func,
-  isUser: PropTypes.bool
+  isUser: PropTypes.bool,
+  toastManager: PropTypes.object.isRequired
 };
 
 Order.defaultProps = {
@@ -176,4 +183,4 @@ Order.defaultProps = {
   isUser: false
 };
 
-export default Order;
+export default withToastManager(Order);

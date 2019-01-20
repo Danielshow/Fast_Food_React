@@ -10,11 +10,11 @@ const mockStore = configureMockStore(middlewares);
 
 const url = 'https://fast-foodd.herokuapp.com/api/v1';
 describe('### Order Actions', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     moxios.install();
   });
 
-  afterAll(() => {
+  afterEach(() => {
     moxios.uninstall();
   });
 
@@ -135,17 +135,36 @@ describe('### Order Actions', () => {
     });
   });
 
-  it('should return an error if getUserFromToken returns 400', async () => {
-    moxios.stubRequest(`${url}/auth/me`, {
+  it('should return an error if orderFailure returns 400', async () => {
+    const error = new Error('Request failed with status code 400');
+    moxios.stubRequest(`${url}/orders`, {
       status: 400,
-      response: mockData.mockError400
+      response: error
     });
-
     const expectedActions = [
-      {err: undefined, type: actionType.GET_TOKEN_TO_ORDER_FAILURE}
+      {type: actionType.ORDER_FOOD_START_FETCH},
+      {err: error, type: actionType.ORDER_FOOD_FAILURE}
     ];
     const store = mockStore({});
-    return store.dispatch(orderActions.getUserFromToken()).then(() => {
+    return store.dispatch(
+      orderActions.orderFood(mockData.signinData)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('should perform an action if getFoodsFromAPI is called', async () => {
+    const error = new Error('Request failed with status code 400');
+    moxios.stubRequest(`${url}/menu`, {
+      status: 400,
+      response: error
+    });
+
+    const store = mockStore({});
+    const expectedActions = [
+      {type: actionType.GET_MENU_START},
+      {type: actionType.GET_MENU_FAILURE, err: error}
+    ];
+    return store.dispatch(orderActions.getFoodsFromAPI()).then(()=> {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

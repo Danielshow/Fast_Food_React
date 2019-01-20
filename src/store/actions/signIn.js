@@ -40,10 +40,9 @@ export const signInUser = (user) => {
       dispatch(postSignIn());
       localStorage.setItem('token', response.data.data.token);
       if (response.data.data.roles === 'admin') {
-        history.push('/admin');
-        return;
+        return history.push('/admin');
       }
-      history.push('/order');
+      return history.push('/order');
     }).catch(err => {
       dispatch(loginFailed(err.response.data.message));
     });

@@ -10,7 +10,7 @@ import combineOrders from '../../helpers/orderHelpers';
 describe('### Order Component', () => {
   let wrapper;
   const props = {
-    toastManager: jest.fn()
+    toastManager: {}
   };
   beforeAll(() => {
     wrapper = shallow(<Order {...props} />);

@@ -9,7 +9,8 @@ const initState = {
 };
 
 const updateMenuStart = (state) => {
-  return updatedObject(state, {updateLoading: true, updateError: false});
+  return updatedObject(state, {
+    updateLoading: true, updateError: false, updateSuccess: false});
 };
 
 const updateMenuSuccess = (state, action) => {

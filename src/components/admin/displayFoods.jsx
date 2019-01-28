@@ -18,7 +18,7 @@ export class DisplayFoods extends Component{
       total:       4,
       current:     0,
       visiblePage: 3,
-      confirmDialog: false
+      confirmDialog: false,
     };
   }
 
@@ -42,7 +42,8 @@ export class DisplayFoods extends Component{
    * @returns {bool} - true or false
    */
   shouldComponentUpdate(nextProps) {
-    const { props: { deleteError, toastManager, deleteSuccess },
+    const { props: {
+      deleteError, toastManager, deleteSuccess, getFoodsFromAPI },
       state: confirmDialog } = this;
     if (deleteError !== nextProps.deleteError
       && nextProps.deleteError === true) {
@@ -57,12 +58,10 @@ export class DisplayFoods extends Component{
         appearance: 'success',
         autoDismiss: true,
       });
+      getFoodsFromAPI();
       this.setState({
         confirmDialog: !confirmDialog,
       });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
       return false;
     }
     return true;
@@ -102,17 +101,21 @@ export class DisplayFoods extends Component{
    */
   renderFoodList = () => {
     const { props: {foods, handleUpdate}, state: {current}} = this;
+    let i = current * 7;
     return (foods || []).slice(current*7, (current + 1) * 7).map((food) => {
+      i += 1;
       return (
         <tbody key={food.id}>
           <tr>
-            <td>{food.id}</td>
+            <td>
+              {i}
+            </td>
             <td>{food.food}</td>
             <td>{food.price}</td>
             {/* eslint-disable-next-line */}
             <td className='delete' onClick={() => {this.handleDelete(food.id)}}>X</td>
             {/* eslint-disable-next-line */}
-            <td onClick={() => {handleUpdate(food)}}>🛠</td>
+            <td className='update' onClick={() => {handleUpdate(food)}}>🛠</td>
           </tr>
         </tbody>
       );
@@ -128,15 +131,6 @@ render() {
       {total, current, visiblePage, confirmDialog, id} } = this;
     return (
       <div className='displayFoods'>
-        <div className='pager'>
-          <Pager
-            total={total}
-            current={current}
-            visiblePages={visiblePage}
-            titles={{ first: '👈', last: '👉' }}
-            onPageChanged={this.handlePageChanged}
-          />
-        </div>
         {foods ? (
           <table>
             <tbody>
@@ -157,9 +151,18 @@ render() {
             {/* eslint-disable-next-line */}
             <div className='btn' onClick={() => {this.confirmDelete(id)}}> Go on</div>
             {/* eslint-disable-next-line */}
-            <div className='btn' onClick={() => {this.handleDelete(id)}} >Never</div>
+            <div className='btn del' onClick={() => {this.handleDelete(id)}} >Never</div>
           </ConfirmDialog>
           ):null}
+        <div className='pager'>
+          <Pager
+            total={total}
+            current={current}
+            visiblePages={visiblePage}
+            titles={{ first: '👈', last: '👉' }}
+            onPageChanged={this.handlePageChanged}
+          />
+        </div>
       </div>
     );
   }
@@ -172,14 +175,16 @@ DisplayFoods.propTypes = {
   deleteError: PropTypes.bool,
   deleteSuccess: PropTypes.bool,
   deleteResponse: PropTypes.string,
-  toastManager: PropTypes.object.isRequired
+  toastManager: PropTypes.object.isRequired,
+  getFoodsFromAPI: PropTypes.func
 };
 
 DisplayFoods.defaultProps = {
   deleteError: false,
   deleteSuccess: false,
   deleteResponse: 'djdj',
-  foods: []
+  foods: [],
+  getFoodsFromAPI:() => {}
 };
 
 export default withToastManager(DisplayFoods);

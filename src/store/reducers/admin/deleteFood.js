@@ -9,7 +9,8 @@ const initState = {
 };
 
 const deleteMenuStart = (state) => {
-  return updatedObject(state, {deleteLoading: true, deleteError: false});
+  return updatedObject(state, {
+    deleteLoading: true, deleteError: false, deleteSuccess: false});
 };
 
 const deleteMenuSuccess = (state, action) => {

@@ -6,12 +6,15 @@ import '../../../__test__/setup/setupEnzyme';
 describe('Display Food component', () => {
   let wrapper;
   const props = {
-    foods: [],
+    foods: [
+      {id: 1, food: 'rice', price: 340 }
+    ],
     handleUpdate: jest.fn(),
     deleteMenu: jest.fn(),
     toastManager: {
       add: jest.fn()
     },
+    deleteError: false,
   };
   beforeAll(() => {
     wrapper = shallow(<DisplayFoods {...props} />);
@@ -49,6 +52,31 @@ describe('Display Food component', () => {
     const nextProps = { deleteSuccess: true };
     expect(wrapper.instance()
       .shouldComponentUpdate(nextProps.deleteSuccess)).toEqual(true);
+  });
+
+  it('should handle td click with class Delete', () => {
+    const td = wrapper.find('td.delete');
+    td.at(0).simulate('click');
+    expect(wrapper.instance().handleDelete()).toHaveBeenCalled;
+  });
+
+  it('should handle div click wth classname btn', () => {
+    const div = wrapper.find('div.btn');
+    div.at(0).simulate('click');
+    expect(wrapper.instance().confirmDelete).toHaveBeenCalled;
+  });
+
+  it('should handle div click wth classname delete', () => {
+    const div = wrapper.find('div.btn');
+    div.at(0).simulate('click');
+    expect(wrapper.instance().confirmDelete).toHaveBeenCalled;
+  });
+
+
+  it('should handle td click wth classname update', () => {
+    const td = wrapper.find('td.update');
+    td.at(0).simulate('click');
+    expect(wrapper.props().handleUpdate).toHaveBeenCalled;
   });
 
   it('should return false when success props is called again', () => {

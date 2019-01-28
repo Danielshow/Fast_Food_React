@@ -141,9 +141,11 @@ class signUpForm extends Component {
               placeholder='password'
             />
           </div>
+          {localerror.password && (
           <p className='small-text'>
             Password must not be less than six characters
           </p>
+          )}
           <div className="input-field">
             <label htmlFor="confirmpassword">Confirm Password</label>
             <br />
@@ -156,9 +158,11 @@ class signUpForm extends Component {
               placeholder='confirm password'
             />
           </div>
+          { localerror.confirmPassword && (
           <p className='small-text'>
             Confirm password must be equal to password
           </p>
+          )}
           {error ===true? <p className="errorMessage">{response}</p>:null}
           <div className="input-field">
             <button

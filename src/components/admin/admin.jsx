@@ -28,16 +28,16 @@ export class Admin extends Component {
    * @returns {bool} - true or false
    */
   shouldComponentUpdate(nextProps) {
-    const { error, toastManager, success } = this.props;
+    const { error, toastManager, success, getFoodsFromAPI } = this.props;
     if (error !== nextProps.error && nextProps.error === true) {
       toastManager.add(`${nextProps.response}`, {
-        appearance: 'error',
+        appearance: 'warning',
         autoDismiss: true,
       });
       return false;
     } else if (success !== nextProps.success && nextProps.success === true) {
       toastManager.add(`${nextProps.response}`, {
-        appearance: 'success',
+        appearance: 'warning',
         autoDismiss: true,
       });
       this.setState({
@@ -46,9 +46,7 @@ export class Admin extends Component {
         price: '',
         response: null
       });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      getFoodsFromAPI();
       return false;
     }
     return true;

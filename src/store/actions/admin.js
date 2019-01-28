@@ -144,7 +144,6 @@ export const deleteMenu = (id) => {
         headers: {Authorization: `Bearer ${token}`}
       });
       dispatch(deleteMenuSuccess(res.data.message));
-    // window.location.reload();
     } catch(err) {
       dispatch(deleteMenuFailure(err.response.data.message));
     }

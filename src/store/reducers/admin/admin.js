@@ -12,7 +12,7 @@ const initState = {
 };
 
 const postMenuStart = (state) => {
-  return updatedObject(state, {loading: true, error: false});
+  return updatedObject(state, {loading: true, error: false, success: false});
 };
 
 const postMenuSuccess = (state, action) => {

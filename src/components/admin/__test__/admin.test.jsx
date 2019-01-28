@@ -73,7 +73,7 @@ describe('###Admin Component', () => {
         add: () => {},
       },
     });
-    expect(wrapper.instance()
+    expect( wrapper.instance()
       .shouldComponentUpdate(nextProps.error)).toEqual(true);
   });
 

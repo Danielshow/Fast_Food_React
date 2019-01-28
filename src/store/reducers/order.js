@@ -6,7 +6,8 @@ const initState = {
   loading: false,
   err: false,
   isUser: null,
-  email: null
+  email: null,
+  success: null,
 };
 
 const getMenuStart = (state) => {
@@ -22,11 +23,12 @@ const getMenuFailure = (state) => {
 };
 
 const orderFoodStart = (state) => {
-  return updateObject(state, {loading: true});
+  return updateObject(state, {loading: true, success: false});
 };
 
 const orderFoodSuccess = (state, action) => {
-  return updateObject(state, {loading: false, orders: action.payload});
+  return updateObject(state, {
+    loading: false, orders: action.payload, success: true});
 };
 
 const orderFoodFailure = (state) => {

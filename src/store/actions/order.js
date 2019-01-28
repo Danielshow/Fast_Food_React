@@ -77,8 +77,7 @@ export const orderFood = (orders) => {
       headers: {Authorization: `Bearer ${token}`},
     }).then((res) => {
       dispatch(orderFoodSuccess(res));
-      localStorage.setItem('myOrders', null);
-      history.push('/');
+      localStorage.removeItem('myOrders');
     }).catch(err => {
       dispatch(orderFoodFailure(err));
       history.push('/');

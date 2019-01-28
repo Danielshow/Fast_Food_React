@@ -81,7 +81,10 @@ describe('LandingPage renders successfully', () => {
 
 
   it('Renders Navbar component', () => {
-    const wrapper = shallow(<Navbar />);
+    const props = {
+      sideDrawerEventClick: jest.fn(),
+    };
+    const wrapper = shallow(<Navbar {...props} />);
     const header = wrapper.find('h3');
     expect(header).toBeCalled;
     expect(header.length).toBe(1);

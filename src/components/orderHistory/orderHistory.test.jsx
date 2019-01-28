@@ -46,17 +46,20 @@ describe('Order History container', () => {
 });
 
   describe('#View Details', () => {
-    let wrapper, orders;
-    beforeEach(() => {
-      orders = {
+    let wrapper;
+    const props = {
+      orders: {
         quantity: '1,8,9',
         food: 'llll,kkk,kkk'
-      };
-      wrapper = shallow(<ViewDetails orders={orders} removeModal={() => {}} />);
+      },
+      removeModal: jest.fn()
+    };
+    beforeEach(() => {
+      wrapper = shallow(<ViewDetails {...props} />);
     });
 
     it('should render View Details', () => {
-      shallow(<ViewDetails orders={orders} removeModal={() => {}} />);
+      shallow(<ViewDetails {...props} />);
     });
 
     it('should call on onClick function if h1 is clicked', () => {

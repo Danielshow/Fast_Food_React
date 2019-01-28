@@ -1268,3 +1268,30 @@ input::placeholder {
     width: 80%;
   }
 }
+
+
+/* Not foumd */
+.not_found {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url('../images/image/undraw_warning_cyit.svg');
+  width: 100%;
+  min-height: 100vh;
+  background-size: 500px 400px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-color: #e06b4163;
+  overflow: hidden;
+  background-attachment: fixed;
+  z-index: -1;
+  padding-top: 70px;
+}
+
+.not_found_text {
+  width: 40%;
+  margin: 0px auto;
+  overflow: hidden;
+  padding: 10px;
+  font-size: 20px;
+}

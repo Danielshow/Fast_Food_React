@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import LandingPage from '../LandingPage/LandingPage';
 import SignIn from '../signIn/signInContainer';
 import SignUp from '../signUp/signUpContainer';
@@ -12,7 +12,7 @@ import Admin from '../admin/adminContainer';
 import SideDrawer from '../layout/sidedrawer/SideDrawerSignout';
 import SideDrawerSignIn from '../layout/sidedrawer/SideDrawerSignin';
 import BackDrop from '../layout/Backdrop/Backdrop';
-
+import NotFound from '../404Page/NotFound';
 /**
  * This Class use various imported Components and display on the webpage
  * @returns {string} - returns jsx
@@ -48,12 +48,15 @@ class App extends Component {
           <Navbar sideDrawerEventClick={this.sideDrawerEventClick} />
           {drawerOpen?
           <>{sideDrawer}<BackDrop click={this.backDropClick} /></>:''}
-          <Route exact path='/' component={LandingPage} />
-          <Route path='/login' component={SignIn} />
-          <Route path='/signup' component={SignUp} />
-          <Route path="/order" component={Order} />
-          <Route path='/customer/order' component={orderHistory} />
-          <Route path='/admin' component={Admin} />
+          <Switch>
+            <Route path='/' exact component={LandingPage} />
+            <Route path='/login' component={SignIn} />
+            <Route path='/signup' component={SignUp} />
+            <Route path="/order" component={Order} />
+            <Route path='/customer/order' component={orderHistory} />
+            <Route path='/admin' component={Admin} />
+            <Route component={NotFound} />
+          </Switch>
         </div>
       </Router>
     );

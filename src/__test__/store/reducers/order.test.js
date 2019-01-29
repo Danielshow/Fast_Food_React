@@ -8,7 +8,8 @@ describe('##Order Reducers', () => {
       loading: false,
       err: false,
       isUser: null,
-      email: null
+      email: null,
+      success: null
     });
   });
 
@@ -56,7 +57,8 @@ describe('##Order Reducers', () => {
     }, {type: actionType.ORDER_FOOD_START_FETCH})).toEqual({
       foods: [],
       loading: true,
-      err: false
+      err: false,
+      success: false,
     });
   });
 
@@ -69,7 +71,8 @@ describe('##Order Reducers', () => {
       foods: [],
       loading: false,
       err: false,
-      orders: {}
+      orders: {},
+      success: true
     });
   });
 

@@ -39,7 +39,12 @@ componentDidMount() {
    * @returns {bool} - true or false
    */
   shouldComponentUpdate(nextProps) {
-    const { updateError, toastManager, updateSuccess } = this.props;
+    const {
+      updateError,
+      toastManager,
+      updateSuccess,
+      getFoodsFromAPI,
+      handleModalState } = this.props;
     if (updateError !== nextProps.updateError
       && nextProps.updateError === true) {
       toastManager.add(`${nextProps.updateResponse}`, {
@@ -50,12 +55,11 @@ componentDidMount() {
     } else if (updateSuccess !== nextProps.updateSuccess
         && nextProps.updateSuccess === true) {
       toastManager.add(`${nextProps.updateResponse}`, {
-        appearance: 'success',
+        appearance: 'warning',
         autoDismiss: true,
       });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      getFoodsFromAPI();
+      handleModalState();
       this.setState({
         foodImage: '',
         food: '',
@@ -181,7 +185,8 @@ UpdateFood.propTypes = {
   updateResponse: PropTypes.string,
   food: PropTypes.object,
   updateMenu: PropTypes.func.isRequired,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  getFoodsFromAPI: PropTypes.func,
 };
 
 UpdateFood.defaultProps = {
@@ -189,8 +194,8 @@ UpdateFood.defaultProps = {
   updateError: false,
   updateSuccess: false,
   food: {},
-  loading: false
-
+  loading: false,
+  getFoodsFromAPI: () => {},
 };
 
 export default withToastManager(UpdateFood);

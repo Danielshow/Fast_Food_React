@@ -37,6 +37,23 @@ export class Order extends Component {
     getUserFromToken();
   }
 
+/**
+ * @param {*} nextProps
+ * @returns {void}
+ * @memberof Order
+ */
+shouldComponentUpdate(nextProps) {
+    const { success } = this.props;
+    if(success !== nextProps.success && nextProps.success === true) {
+      this.setState({
+        orders: [],
+        total: 0
+      });
+      return true;
+    }
+    return true;
+  }
+
   /**
    * @description - Get menu from API
    * @returns {list} menu of foods
@@ -50,6 +67,12 @@ export class Order extends Component {
    * @return {object} - updated state
    */
   handleClick = (food) => {
+    const { toastManager } = this.props;
+    toastManager.add(`${food.food} has been added to cart`, {
+      appearance: 'warning',
+      autoDismiss: true,
+      autoDismissTimeout: '3000',
+    });
     const { orders, total } = this.state;
     const orderso = orders.filter((order) => {
       if (order.id === food.id) {
@@ -83,6 +106,12 @@ export class Order extends Component {
         newTotal = total - Number(order.price * order.quantity);
         order.tprice = 0;
         order.quantity = 0;
+        const { toastManager } = this.props;
+        toastManager.add(`${order.food} has been removed from cart`, {
+          appearance: 'warning',
+          autoDismiss: true,
+          autoDismissTimeout: '3000',
+        });
       }
       return order.id !== id;
     });
@@ -111,7 +140,16 @@ export class Order extends Component {
         autoDismiss: true,
       });
     } else {
-      history.push('/login');
+      toastManager.add(
+        `Kindly Login to Order Food. Your Cart is preserved. 
+        You will be redirected to signin page in 5seconds`, {
+        appearance: 'error',
+        autoDismiss: true,
+        autoDismissTimeout: '8000',
+      });
+      setTimeout(() => {
+        history.push('/login');
+      },8000);
     }
   }
   /**
@@ -119,7 +157,7 @@ export class Order extends Component {
   */
   render() {
     const { state: { orders, total, modal, isUser },
-      props: {loading, foods, orderFood} } = this;
+      props: {loading, foods, orderFood, success} } = this;
     const foodList = foods.map(food => {
       return (
         <div className="food" key={food.id}>
@@ -144,7 +182,13 @@ export class Order extends Component {
       <div className="orderContainer">
         {modal?
           // eslint-disable-next-line
-          <OrderConfirmation removeModal={this.removeModal} orders={orders} total={total} orderFood={orderFood} />:null}
+          <OrderConfirmation 
+            removeModal={this.removeModal}
+            orders={orders}
+            total={total}
+            orderFood={orderFood}
+            success={success}
+          />:null}
         {loading?<Spinner />:null}
         <div className="foodContainer">
           {foods.length < 1? <h3>No Foood Available</h3>:null}
@@ -171,7 +215,8 @@ Order.propTypes = {
   foods: PropTypes.array,
   getUserFromToken: PropTypes.func,
   isUser: PropTypes.bool,
-  toastManager: PropTypes.object.isRequired
+  toastManager: PropTypes.object.isRequired,
+  success: PropTypes.bool
 };
 
 Order.defaultProps = {
@@ -180,7 +225,8 @@ Order.defaultProps = {
   loading: false,
   orderFood: () => {},
   getUserFromToken: () => {},
-  isUser: false
+  isUser: false,
+  success: false,
 };
 
 export default withToastManager(Order);

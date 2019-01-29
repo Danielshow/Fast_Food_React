@@ -22,6 +22,29 @@ describe('OrderHistory', () => {
     wrap.setProps({isUserGotten: true});
   });
 
+  it('should call handleClick', () => {
+    const wrap = wrapper.find('td.view');
+    wrap.at(0).simulate('click');
+    expect(wrapper.instance().handleClick()).toHaveBeenCalled;
+  });
+
+  it('should call Spinner', () => {
+    wrapper.setProps({loading: true});
+    const spinner = wrapper.find('Spinner');
+    expect(spinner.length).toEqual(1);
+  });
+
+  it('should call h3', () => {
+    wrapper.setProps({orderFailure: true});
+    const spinner = wrapper.find('h3');
+    expect(spinner.length).toEqual(1);
+  });
+
+
+  it('should call removeModal', () => {
+    wrapper.instance().removeModal();
+  });
+
   it('should call td and simulate click', () => {
     wrapper.setState({
       modal: true

@@ -8,7 +8,8 @@ export const mapStateToProps = state => {
     foods: state.ord.foods,
     loading: state.ord.loading,
     isUser: state.ord.isUser,
-    email: state.ord.email
+    email: state.ord.email,
+    success: state.ord.success
   };
 };
 

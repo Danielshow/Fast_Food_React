@@ -1,5 +1,6 @@
 import React, { Component }from 'react';
 import PropTypes from 'prop-types';
+import { withToastManager } from 'react-toast-notifications';
 import { isValidPhoneNumber, isAddressValid } from '../../helpers/authHelpers';
 import Toast from '../layout/Toast';
 import combineOrders from '../../helpers/orderHelpers';
@@ -7,7 +8,7 @@ import combineOrders from '../../helpers/orderHelpers';
 /**
  * @class
  */
-class OrderConfirmation extends Component{
+export class OrderConfirmation extends Component{
   /**
    * @constructor
    */
@@ -21,6 +22,25 @@ class OrderConfirmation extends Component{
       response: null
     };
   }
+  /**
+   * @param {*} nextProps
+   * @memberof OrderConfirmation
+   * @returns {void}
+   */
+  shouldComponentUpdate(nextProps) {
+    const { success, toastManager, removeModal } = this.props;
+    if(success !== nextProps.success && nextProps.success === true) {
+      localStorage.removeItem('myOrders');
+      toastManager.add('Order Successfull', {
+        appearance: 'warning',
+        autoDismiss: true,
+      });
+      removeModal();
+      return true;
+    }
+    return true;
+  }
+
 /**
  * @param {*} e
  * @returns {object} - update state
@@ -73,6 +93,7 @@ handleSubmit = (e) => {
   orderFood(order);
   return true;
 }
+
 /**
  * @function
  * @returns {JXS} -
@@ -132,11 +153,15 @@ OrderConfirmation.propTypes = {
   //eslint-disable-next-line
   orders: PropTypes.array,
   total: PropTypes.number.isRequired,
-  orderFood: PropTypes.func
+  orderFood: PropTypes.func,
+  success: PropTypes.bool,
+  toastManager: PropTypes.object
 };
 
 OrderConfirmation.defaultProps ={
-  orderFood: () => {}
+  orderFood: () => {},
+  success: false,
+  toastManager: {}
 };
 
-export default OrderConfirmation;
+export default withToastManager(OrderConfirmation);
